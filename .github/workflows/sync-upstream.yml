@@ -30,7 +30,7 @@ jobs:
           # Remove o remote upstream se já existir (evita erro de duplicação)
           git remote remove upstream || true
           # Adiciona o remote upstream CORRETO (baseado no seu erro)
-          git remote add upstream https://github.com/BoringBoredom/UEFI-Edk2-Slim.git
+          git remote add upstream https://github.com/BoringBoredom/UEFI-Editor.git
           # Busca as alterações do upstream
           git fetch upstream
           # Faz merge permitindo históricos não relacionados
