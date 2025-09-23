@@ -14,6 +14,9 @@ jobs:
       # Passo 1: Checkout do código do seu fork
       - name: Checkout fork
         uses: actions/checkout@v4
+        with:
+          # Especifica o branch master explicitamente
+          ref: master
 
       # Passo 2: Configurar Git
       - name: Configure Git
@@ -24,12 +27,14 @@ jobs:
       # Passo 3: Sincronizar com o repositório upstream
       - name: Merge upstream changes
         run: |
-          # Adiciona o remote upstream
-          git remote add upstream https://github.com/BoringBoredom/UEFI-Editor.git
+          # Remove o remote upstream se já existir (evita erro de duplicação)
+          git remote remove upstream || true
+          # Adiciona o remote upstream CORRETO (baseado no seu erro)
+          git remote add upstream https://github.com/BoringBoredom/UEFI-Edk2-Slim.git
           # Busca as alterações do upstream
           git fetch upstream
-          # Faz merge das alterações do branch principal (ex: master) do upstream
-          git merge upstream/master --no-edit
+          # Faz merge permitindo históricos não relacionados
+          git merge upstream/master --allow-unrelated-histories --no-edit
 
       # Passo 4: Envia as alterações para o seu fork
       - name: Push changes
